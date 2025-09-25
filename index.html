@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '%VITE_GA_ID%');
-</script>
+    <!-- Google tag (gtag.js) - will be conditionally loaded -->
+    <script>
+      // Only load Google Analytics if VITE_GA_ID is defined
+      const gaId = '%VITE_GA_ID%';
+      if (gaId && gaId !== '%VITE_GA_ID%' && gaId !== '') {
+        // Load Google Analytics
+        const script1 = document.createElement('script');
+        script1.async = true;
+        script1.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+        document.head.appendChild(script1);
+        
+        // Initialize gtag
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gaId);
+        window.gtag = gtag;
+      }
+    </script>
     <meta charset="UTF-8" />
     <meta name="description" content="Automatisez et optimisez vos relances clients avec PaymentFlow : la solution SaaS pour accélérer vos encaissements, simplifier le suivi et améliorer la trésorerie de votre entreprise." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

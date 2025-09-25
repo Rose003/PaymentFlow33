@@ -309,7 +309,7 @@ export function SubscriptionSettings() {
 
 // Composant 3 : Moyen de paiement
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_your_test_key_here'); // Use environment variable
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_your_test_key_here'); // Use environment variable
 
 export function PaymentMethodSettings() {
   const [method, setMethod] = useState<'card' | 'sepa'>('card');
