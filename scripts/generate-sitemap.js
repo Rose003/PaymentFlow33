@@ -56,5 +56,34 @@ ${ROUTES.map(route => {
 }).join('\n')}
 </urlset>\n`;
 
-fs.writeFileSync(path.join(__dirname, '../public/sitemap.xml'), sitemap);
-console.log('Sitemap généré avec succès !');
+// Write to both public and dist directories for compatibility
+const publicPath = path.join(__dirname, '../public/sitemap.xml');
+const distPath = path.join(__dirname, '../dist/sitemap.xml');
+
+// Ensure directories exist
+const publicDir = path.dirname(publicPath);
+const distDir = path.dirname(distPath);
+
+if (!fs.existsSync(publicDir)) {
+  fs.mkdirSync(publicDir, { recursive: true });
+}
+if (!fs.existsSync(distDir)) {
+  fs.mkdirSync(distDir, { recursive: true });
+}
+
+// Write sitemap to both locations
+try {
+  fs.writeFileSync(publicPath, sitemap);
+  console.log('✅ Sitemap généré dans public/sitemap.xml');
+} catch (error) {
+  console.log('⚠️  Could not write to public/, continuing...');
+}
+
+try {
+  fs.writeFileSync(distPath, sitemap);
+  console.log('✅ Sitemap généré dans dist/sitemap.xml');
+} catch (error) {
+  console.log('⚠️  Could not write to dist/, continuing...');
+}
+
+console.log('🎉 Sitemap généré avec succès !');
