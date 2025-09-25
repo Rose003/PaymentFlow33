@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && npm run prerender && npm run sitemap",
     "build:seo": "tsc --noEmit && vite build && npm run prerender && npm run sitemap && npm run verify-indexing",
     "prerender": "node scripts/prerender.js",
     "sitemap": "node scripts/generate-sitemap.js",
