@@ -59,6 +59,11 @@ function generateStaticHTML(route, mainHTML) {
     html = html.replace('<head>', `<head>\n  <meta name="description" content="${description}">`);
   }
   
+  // Remove JavaScript bundles and scripts for better pre-rendering detection
+  html = html.replace(/<script type="module" crossorigin src="[^"]*"><\/script>/g, '');
+  html = html.replace(/<script>[\s\S]*?window\.addEventListener\([\s\S]*?<\/script>/g, '');
+  html = html.replace(/<script>[\s\S]*?window\.chtlConfig[\s\S]*?<\/script>/g, '');
+  
   // Add comprehensive SEO meta tags
   const seoTags = `
   <!-- SEO Meta Tags -->
