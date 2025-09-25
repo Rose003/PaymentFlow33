@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build && npm run prerender && npm run sitemap",
+    "build:prerender": "tsc --noEmit && vite build && npm run sitemap && npm run prerender:with-server",
+    "prerender:with-server": "concurrently \"npm run preview\" \"sleep 5 && npm run prerender\" --kill-others",
     "build:seo": "tsc --noEmit && vite build && npm run prerender && npm run sitemap && npm run verify-indexing",
     "prerender": "node scripts/prerender.js",
     "sitemap": "node scripts/generate-sitemap.js",
@@ -77,6 +79,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.18",
+    "concurrently": "^9.2.1",
     "eslint": "^9.9.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.11",
