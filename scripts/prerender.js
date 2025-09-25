@@ -63,6 +63,10 @@ function generateStaticHTML(route, mainHTML) {
   html = html.replace(/<script type="module" crossorigin src="[^"]*"><\/script>/g, '');
   html = html.replace(/<script>[\s\S]*?window\.addEventListener\([\s\S]*?<\/script>/g, '');
   html = html.replace(/<script>[\s\S]*?window\.chtlConfig[\s\S]*?<\/script>/g, '');
+  html = html.replace(/<script>[\s\S]*?gaId[\s\S]*?<\/script>/g, '');
+  
+  // Add pre-rendering indicators for better detection
+  html = html.replace('<head>', '<head>\n  <!-- Pre-rendered static content -->\n  <meta name="prerender" content="true">\n  <meta name="generator" content="PaymentFlow Static Generator">');
   
   // Add comprehensive SEO meta tags
   const seoTags = `
@@ -77,10 +81,10 @@ function generateStaticHTML(route, mainHTML) {
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://paymentflow.com${route.path}">
+  <meta property="og:url" content="https://paymentflow3.onrender.com${route.path}">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
-  <meta property="og:image" content="https://paymentflow.com/images/paymentflow-og-image.jpg">
+  <meta property="og:image" content="https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="PaymentFlow">
@@ -88,15 +92,15 @@ function generateStaticHTML(route, mainHTML) {
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://paymentflow.com${route.path}">
+  <meta name="twitter:url" content="https://paymentflow3.onrender.com${route.path}">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
-  <meta name="twitter:image" content="https://paymentflow.com/images/paymentflow-og-image.jpg">
+  <meta name="twitter:image" content="https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg">
   <meta name="twitter:site" content="@paymentflow">
   <meta name="twitter:creator" content="@paymentflow">
   
   <!-- Additional SEO -->
-  <link rel="canonical" href="https://paymentflow.com${route.path}">
+  <link rel="canonical" href="https://paymentflow3.onrender.com${route.path}">
   <meta name="theme-color" content="#2563eb">
   <meta name="msapplication-TileColor" content="#2563eb">
   
@@ -107,12 +111,12 @@ function generateStaticHTML(route, mainHTML) {
     "@type": "WebPage",
     "name": "${title}",
     "description": "${description}",
-    "url": "https://paymentflow.com${route.path}",
+    "url": "https://paymentflow3.onrender.com${route.path}",
     "mainEntity": {
       "@type": "Organization",
       "name": "PaymentFlow",
-      "url": "https://paymentflow.com",
-      "logo": "https://paymentflow.com/images/logo.png",
+      "url": "https://paymentflow3.onrender.com",
+      "logo": "https://paymentflow3.onrender.com/images/logo.png",
       "description": "Solution complète de gestion des factures et relances pour votre entreprise"
     },
     "breadcrumb": {
@@ -122,13 +126,13 @@ function generateStaticHTML(route, mainHTML) {
           "@type": "ListItem",
           "position": 1,
           "name": "Accueil",
-          "item": "https://paymentflow.com"
+          "item": "https://paymentflow3.onrender.com"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "${title.replace(' - PaymentFlow', '')}",
-          "item": "https://paymentflow.com${route.path}"
+          "item": "https://paymentflow3.onrender.com${route.path}"
         }
       ]
     }

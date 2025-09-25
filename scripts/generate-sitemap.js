@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BASE_URL = 'https://paymentflow.com';
+const BASE_URL = 'https://paymentflow3.onrender.com';
 const ROUTES = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/help', priority: '0.8', changefreq: 'monthly' },
