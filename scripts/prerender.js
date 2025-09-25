@@ -59,14 +59,8 @@ function generateStaticHTML(route, mainHTML) {
     html = html.replace('<head>', `<head>\n  <meta name="description" content="${description}">`);
   }
   
-  // Remove JavaScript bundles and scripts for better pre-rendering detection
-  html = html.replace(/<script type="module" crossorigin src="[^"]*"><\/script>/g, '');
-  html = html.replace(/<script>[\s\S]*?window\.addEventListener\([\s\S]*?<\/script>/g, '');
-  html = html.replace(/<script>[\s\S]*?window\.chtlConfig[\s\S]*?<\/script>/g, '');
-  html = html.replace(/<script>[\s\S]*?gaId[\s\S]*?<\/script>/g, '');
-  
-  // Add pre-rendering indicators for better detection
-  html = html.replace('<head>', '<head>\n  <!-- Pre-rendered static content -->\n  <meta name="prerender" content="true">\n  <meta name="generator" content="PaymentFlow Static Generator">');
+  // Add SEO indicators without interfering with React functionality
+  html = html.replace('<head>', '<head>\n  <!-- SEO Optimized -->\n  <meta name="seo-optimized" content="true">\n  <meta name="generator" content="PaymentFlow SEO Generator">');
   
   // Add comprehensive SEO meta tags
   const seoTags = `
@@ -144,115 +138,18 @@ function generateStaticHTML(route, mainHTML) {
   return html;
 }
 
-function generateStaticContent(route) {
-  // Generate basic static content for each route
-  const contentMap = {
-    '/': `
-      <div class="min-h-screen bg-gray-50">
-        <div class="container mx-auto px-4 py-8">
-          <h1 class="text-4xl font-bold text-gray-900 mb-6">PaymentFlow</h1>
-          <h2 class="text-2xl font-semibold text-gray-700 mb-4">Gestion des factures et relances</h2>
-          <p class="text-lg text-gray-600 mb-6">Solution complète de gestion des factures et relances pour votre entreprise. Automatisez et optimisez vos encaissements, simplifiez le suivi et améliorez votre trésorerie.</p>
-          <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow">
-              <h3 class="text-xl font-semibold mb-3">Gestion des factures</h3>
-              <p class="text-gray-600">Créez, suivez et gérez vos factures facilement.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow">
-              <h3 class="text-xl font-semibold mb-3">Relances automatiques</h3>
-              <p class="text-gray-600">Automatisez vos relances clients pour optimiser vos encaissements.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow">
-              <h3 class="text-xl font-semibold mb-3">Tableaux de bord</h3>
-              <p class="text-gray-600">Suivez vos performances avec des tableaux de bord détaillés.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    `,
-    '/pricing': `
-      <div class="min-h-screen bg-gray-50">
-        <div class="container mx-auto px-4 py-8">
-          <h1 class="text-4xl font-bold text-gray-900 mb-6">Tarifs PaymentFlow</h1>
-          <p class="text-lg text-gray-600 mb-8">Choisissez le plan qui correspond à vos besoins</p>
-          <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow">
-              <h3 class="text-xl font-semibold mb-3">Starter</h3>
-              <p class="text-3xl font-bold text-blue-600 mb-4">29€/mois</p>
-              <ul class="space-y-2 text-gray-600">
-                <li>Jusqu'à 100 factures</li>
-                <li>Relances automatiques</li>
-                <li>Support email</li>
-              </ul>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow border-2 border-blue-500">
-              <h3 class="text-xl font-semibold mb-3">Professional</h3>
-              <p class="text-3xl font-bold text-blue-600 mb-4">79€/mois</p>
-              <ul class="space-y-2 text-gray-600">
-                <li>Factures illimitées</li>
-                <li>Relances personnalisées</li>
-                <li>Support prioritaire</li>
-              </ul>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow">
-              <h3 class="text-xl font-semibold mb-3">Enterprise</h3>
-              <p class="text-3xl font-bold text-blue-600 mb-4">Contactez-nous</p>
-              <ul class="space-y-2 text-gray-600">
-                <li>Fonctionnalités avancées</li>
-                <li>Support dédié</li>
-                <li>Intégrations personnalisées</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    `,
-    '/blog': `
-      <div class="min-h-screen bg-gray-50">
-        <div class="container mx-auto px-4 py-8">
-          <h1 class="text-4xl font-bold text-gray-900 mb-6">Blog PaymentFlow</h1>
-          <p class="text-lg text-gray-600 mb-8">Conseils et astuces pour optimiser votre gestion des factures</p>
-          <div class="grid md:grid-cols-2 gap-6">
-            <article class="bg-white p-6 rounded-lg shadow">
-              <h2 class="text-xl font-semibold mb-3">Comment optimiser vos relances clients</h2>
-              <p class="text-gray-600 mb-4">Découvrez les meilleures pratiques pour améliorer vos taux de recouvrement.</p>
-              <a href="/blog-optimisation-relance" class="text-blue-600 hover:underline">Lire la suite</a>
-            </article>
-            <article class="bg-white p-6 rounded-lg shadow">
-              <h2 class="text-xl font-semibold mb-3">Gestion des factures en garage</h2>
-              <p class="text-gray-600 mb-4">Conseils spécifiques pour les professionnels de l'automobile.</p>
-              <a href="/blog-garage" class="text-blue-600 hover:underline">Lire la suite</a>
-            </article>
-          </div>
-        </div>
-      </div>
-    `
-  };
-
-  return contentMap[route.path] || `
-    <div class="min-h-screen bg-gray-50">
-      <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold text-gray-900 mb-6">${route.title}</h1>
-        <p class="text-lg text-gray-600 mb-6">${route.description}</p>
-        <div class="bg-white p-6 rounded-lg shadow">
-          <p class="text-gray-600">Contenu de la page ${route.path}</p>
-        </div>
-      </div>
-    </div>
-  `;
-}
 
 function prerender() {
-  console.log('🚀 Starting static HTML generation...');
+  console.log('🚀 Starting SEO optimization for HTML files...');
   
   try {
     const mainHTML = readMainIndex();
-    console.log('📄 Generating static HTML files...');
+    console.log('📄 Optimizing HTML files for SEO...');
     
     for (const route of routes) {
-      console.log(`  ⏳ Generating ${route.path}...`);
+      console.log(`  ⏳ Optimizing ${route.path}...`);
       
-      // Generate HTML with static content
+      // Start with the main HTML template
       let html = mainHTML;
       
       // Replace the title and meta tags
@@ -265,16 +162,7 @@ function prerender() {
         html = html.replace('<head>', `<head>\n  <meta name="description" content="${route.description}">`);
       }
       
-      // Generate static content for the route
-      const staticContent = generateStaticContent(route);
-      
-      // Replace the root div content with static content
-      html = html.replace(
-        '<div id="root"></div>',
-        `<div id="root">${staticContent}</div>`
-      );
-      
-      // Apply SEO optimizations
+      // Apply SEO optimizations (meta tags, structured data, etc.)
       html = generateStaticHTML(route, html);
       
       // Create directory if it doesn't exist
@@ -290,15 +178,16 @@ function prerender() {
         
       fs.writeFileSync(htmlPath, html);
       
-      console.log(`  ✅ Generated ${htmlPath}`);
+      console.log(`  ✅ Optimized ${htmlPath}`);
     }
     
-    console.log('🎉 Static HTML generation completed!');
+    console.log('🎉 SEO optimization completed!');
     console.log('📁 Generated SEO-optimized HTML files in dist/ directory');
-    console.log('🔍 Each page now has proper meta tags and static content for search engines');
+    console.log('🔍 Each page now has proper meta tags for search engines');
+    console.log('⚡ React app remains fully functional for users');
     
   } catch (error) {
-    console.error('❌ Error during static generation:', error.message);
+    console.error('❌ Error during SEO optimization:', error.message);
     process.exit(1);
   }
 }
