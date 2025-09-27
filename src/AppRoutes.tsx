@@ -6,45 +6,43 @@ import {
   Navigate,
 } from "react-router-dom";
 
-// Lazy load components for better performance
-const LandingPage = lazy(() => import("./pages/LandingPage"));
-const SignupPage = lazy(() => import("./pages/SignupPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage"));
-const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
-const PricingPage = lazy(() => import("./pages/PricingPage"));
-const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
-const LegalNoticePage = lazy(() => import("./pages/LegalNoticePage"));
-const TermsOfUsePage = lazy(() => import("./pages/TermsOfUsePage"));
+// Import critical components normally to avoid routing issues
+import LandingPage from "./pages/LandingPage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import ForgotPassword from "./pages/ForgotPassword";
+import PricingPage from "./pages/PricingPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import LegalNoticePage from "./pages/LegalNoticePage";
+import TermsOfUsePage from "./pages/TermsOfUsePage";
+import HelpAndSupport from "./pages/HelpAndSupport";
+import SuccessStoriesPage from "./pages/SuccessStoriesPage";
+import SubscribePage from "./pages/SubscribePage";
+import ReportingRecouvrement from "./pages/ReportingRecouvrement";
+import CrmPage from "./pages/CrmPage";
+import DSOSimulator from "./pages/DSOSimulator";
+import Personnalisation from "./pages/Personnalisation";
+import DashboardRedirect from "./components/DashboardRedirect";
+import AppHeader from "./components/AppHeader";
+import Layout from "./components/Layout";
+import Dashboard from "./components/Dashboard";
+import ClientPage from "./components/clients/ClientPage";
+import ReceivablesList from "./components/receivables/ReceivablesList";
+import ReceivableForm from "./components/receivables/ReceivableForm";
+import Settings from "./components/settings/Settings";
+import ReminderList from "./components/reminders/ReminderList";
+import AuthMFA from "./components/AuthMFA";
+import ResetPassword from "./components/ResetPassword";
+
+// Only lazy load heavy blog components and less critical pages
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogGarage = lazy(() => import("./pages/BlogGarage"));
 const BlogManufacture = lazy(() => import("./pages/BlogManufacture"));
 const BlogCommunication = lazy(() => import("./pages/BlogCommunication"));
 const BlogComptableBanque = lazy(() => import("./pages/BlogComptableBanque"));
 const BlogOptimisationRelance = lazy(() => import("./pages/BlogOptimisationRelance"));
-const HelpAndSupport = lazy(() => import("./pages/HelpAndSupport"));
-const SuccessStoriesPage = lazy(() => import("./pages/SuccessStoriesPage"));
 const AbonnementSuccess = lazy(() => import("./pages/success"));
-const SubscribePage = lazy(() => import("./pages/SubscribePage"));
-const ReportingRecouvrement = lazy(() => import("./pages/ReportingRecouvrement"));
-const CrmPage = lazy(() => import("./pages/CrmPage"));
-const DSOSimulator = lazy(() => import("./pages/DSOSimulator"));
-const Personnalisation = lazy(() => import("./pages/Personnalisation"));
-
-// Dashboard components (lazy loaded)
-const Layout = lazy(() => import("./components/Layout"));
-const Dashboard = lazy(() => import("./components/Dashboard"));
-const ClientPage = lazy(() => import("./components/clients/ClientPage"));
-const ReceivablesList = lazy(() => import("./components/receivables/ReceivablesList"));
-const ReceivableForm = lazy(() => import("./components/receivables/ReceivableForm"));
-const Settings = lazy(() => import("./components/settings/Settings"));
-const ReminderList = lazy(() => import("./components/reminders/ReminderList"));
 const Success = lazy(() => import("./components/settings/paymentSuccess"));
-const AuthMFA = lazy(() => import("./components/AuthMFA"));
-const ResetPassword = lazy(() => import("./components/ResetPassword"));
-
-// Keep critical components non-lazy for faster initial load
-import DashboardRedirect from "./components/DashboardRedirect";
-import AppHeader from "./components/AppHeader";
 
 import { User } from "@supabase/supabase-js";
 
@@ -66,8 +64,7 @@ export default function AppRoutes({ user, onMFASuccess }: AppRoutesProps) {
     <Router>
       {!user && <AppHeader user={user} onContactClick={() => {}} />}
 
-      <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
+      <Routes>
         {/* Routes publiques */}
         <Route
           path="/"
@@ -89,7 +86,11 @@ export default function AppRoutes({ user, onMFASuccess }: AppRoutesProps) {
         <Route path="/crm" element={<CrmPage />} />
         <Route path="/simulateur-dso" element={<DSOSimulator />} />
         <Route path="/personnalisation" element={<Personnalisation />} />
-        <Route path="/paiement-abonement" element={<AbonnementSuccess />} />
+        <Route path="/paiement-abonement" element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <AbonnementSuccess />
+          </Suspense>
+        } />
         <Route
           path="/signup"
           element={
@@ -108,17 +109,39 @@ export default function AppRoutes({ user, onMFASuccess }: AppRoutesProps) {
         <Route
           path="/blog"
           element={
-            <BlogPage setShowContact={() => {}} setDefaultSubject={() => {}} />
+            <Suspense fallback={<LoadingSpinner />}>
+              <BlogPage setShowContact={() => {}} setDefaultSubject={() => {}} />
+            </Suspense>
           }
         />
-        <Route path="/blog-garage" element={<BlogGarage />} />
-        <Route path="/blog-manufacture" element={<BlogManufacture />} />
-        <Route path="/blog-communication" element={<BlogCommunication />} />
+        <Route path="/blog-garage" element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <BlogGarage />
+          </Suspense>
+        } />
+        <Route path="/blog-manufacture" element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <BlogManufacture />
+          </Suspense>
+        } />
+        <Route path="/blog-communication" element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <BlogCommunication />
+          </Suspense>
+        } />
         <Route
           path="/blog-comptable-banque"
-          element={<BlogComptableBanque />}
+          element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <BlogComptableBanque />
+            </Suspense>
+          }
         />
-        <Route path="/blog-optimisation-relance" element={<BlogOptimisationRelance />} />
+        <Route path="/blog-optimisation-relance" element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <BlogOptimisationRelance />
+          </Suspense>
+        } />
         <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Routes protégées */}
@@ -139,7 +162,11 @@ export default function AppRoutes({ user, onMFASuccess }: AppRoutesProps) {
           <Route path="receivables/new" element={<ReceivableForm onClose={() => {}} onReceivableAdded={() => {}} />} />
           <Route path="settings" element={<Settings />} />
           <Route path="reminders" element={<ReminderList />} />
-          <Route path="success" element={<Success />} />
+          <Route path="success" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <Success />
+            </Suspense>
+          } />
         </Route>
 
         {/* Redirection par défaut */}
@@ -147,8 +174,7 @@ export default function AppRoutes({ user, onMFASuccess }: AppRoutesProps) {
           path="*"
           element={<Navigate to={user ? "/dashboard" : "/"} replace />}
         />
-        </Routes>
-      </Suspense>
+      </Routes>
     </Router>
   );
 }
