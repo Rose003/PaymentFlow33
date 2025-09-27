@@ -1,46 +1,59 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
+
+// Lazy load components for better performance
+const LandingPage = lazy(() => import("./pages/LandingPage"));
+const SignupPage = lazy(() => import("./pages/SignupPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const PricingPage = lazy(() => import("./pages/PricingPage"));
+const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
+const LegalNoticePage = lazy(() => import("./pages/LegalNoticePage"));
+const TermsOfUsePage = lazy(() => import("./pages/TermsOfUsePage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogGarage = lazy(() => import("./pages/BlogGarage"));
+const BlogManufacture = lazy(() => import("./pages/BlogManufacture"));
+const BlogCommunication = lazy(() => import("./pages/BlogCommunication"));
+const BlogComptableBanque = lazy(() => import("./pages/BlogComptableBanque"));
+const BlogOptimisationRelance = lazy(() => import("./pages/BlogOptimisationRelance"));
+const HelpAndSupport = lazy(() => import("./pages/HelpAndSupport"));
+const SuccessStoriesPage = lazy(() => import("./pages/SuccessStoriesPage"));
+const AbonnementSuccess = lazy(() => import("./pages/success"));
+const SubscribePage = lazy(() => import("./pages/SubscribePage"));
+const ReportingRecouvrement = lazy(() => import("./pages/ReportingRecouvrement"));
+const CrmPage = lazy(() => import("./pages/CrmPage"));
+const DSOSimulator = lazy(() => import("./pages/DSOSimulator"));
+const Personnalisation = lazy(() => import("./pages/Personnalisation"));
+
+// Dashboard components (lazy loaded)
+const Layout = lazy(() => import("./components/Layout"));
+const Dashboard = lazy(() => import("./components/Dashboard"));
+const ClientPage = lazy(() => import("./components/clients/ClientPage"));
+const ReceivablesList = lazy(() => import("./components/receivables/ReceivablesList"));
+const ReceivableForm = lazy(() => import("./components/receivables/ReceivableForm"));
+const Settings = lazy(() => import("./components/settings/Settings"));
+const ReminderList = lazy(() => import("./components/reminders/ReminderList"));
+const Success = lazy(() => import("./components/settings/paymentSuccess"));
+const AuthMFA = lazy(() => import("./components/AuthMFA"));
+const ResetPassword = lazy(() => import("./components/ResetPassword"));
+
+// Keep critical components non-lazy for faster initial load
 import DashboardRedirect from "./components/DashboardRedirect";
-import LandingPage from "./pages/LandingPage";
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
-import ForgotPassword from "./pages/ForgotPassword";
-import PricingPage from "./pages/PricingPage";
-import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
-import LegalNoticePage from "./pages/LegalNoticePage";
-import TermsOfUsePage from "./pages/TermsOfUsePage";
-import BlogPage from "./pages/BlogPage";
-import BlogGarage from "./pages/BlogGarage";
-import BlogManufacture from "./pages/BlogManufacture";
-import BlogCommunication from "./pages/BlogCommunication";
-import BlogComptableBanque from "./pages/BlogComptableBanque";
-import BlogOptimisationRelance from "./pages/BlogOptimisationRelance";
-import Layout from "./components/Layout";
-import Dashboard from "./components/Dashboard";
-import ClientPage from "./components/clients/ClientPage";
-import ReceivablesList from "./components/receivables/ReceivablesList";
-import ReceivableForm from "./components/receivables/ReceivableForm";
-import Settings from "./components/settings/Settings";
-import ReminderList from "./components/reminders/ReminderList";
-import HelpAndSupport from "./pages/HelpAndSupport";
-import SuccessStoriesPage from "./pages/SuccessStoriesPage";
-import AbonnementSuccess from "./pages/success";
-import SubscribePage from "./pages/SubscribePage";
-import Success from "./components/settings/paymentSuccess";
 import AppHeader from "./components/AppHeader";
-import ReportingRecouvrement from "./pages/ReportingRecouvrement";
-import CrmPage from "./pages/CrmPage";
-import DSOSimulator from "./pages/DSOSimulator";
-import Personnalisation from "./pages/Personnalisation";
 
 import { User } from "@supabase/supabase-js";
-import AuthMFA from "./components/AuthMFA";
-import ResetPassword from "./components/ResetPassword";
+
+// Loading component
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+  </div>
+);
 
 interface AppRoutesProps {
   user: User | null;
@@ -53,7 +66,8 @@ export default function AppRoutes({ user, onMFASuccess }: AppRoutesProps) {
     <Router>
       {!user && <AppHeader user={user} onContactClick={() => {}} />}
 
-      <Routes>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
         {/* Routes publiques */}
         <Route
           path="/"
@@ -133,7 +147,8 @@ export default function AppRoutes({ user, onMFASuccess }: AppRoutesProps) {
           path="*"
           element={<Navigate to={user ? "/dashboard" : "/"} replace />}
         />
-      </Routes>
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

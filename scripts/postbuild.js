@@ -69,6 +69,18 @@ function postbuild() {
   const sitemapSource = path.join(__dirname, '../public/sitemap.xml');
   copyFileIfExists(sitemapSource, path.join(distPath, 'sitemap.xml'));
   
+  // Copy service worker
+  copyFileIfExists(
+    path.join(__dirname, '../public/sw.js'),
+    path.join(distPath, 'sw.js')
+  );
+  
+  // Copy manifest.json
+  copyFileIfExists(
+    path.join(__dirname, '../public/manifest.json'),
+    path.join(distPath, 'manifest.json')
+  );
+  
   console.log('🎉 Post-build tasks completed!');
 }
 
