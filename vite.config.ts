@@ -26,45 +26,8 @@ export default defineConfig({
         unknownGlobalSideEffects: false
       },
       output: {
-        manualChunks: (id) => {
-          // More granular chunking for better caching
-          if (id.includes('node_modules')) {
-            // Core React - highest priority, smallest chunk
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
-              return 'react-core';
-            }
-            // Supabase - critical for auth
-            if (id.includes('@supabase')) {
-              return 'supabase';
-            }
-            // UI libraries - grouped by usage
-            if (id.includes('@mantine') || id.includes('@mui') || id.includes('@headlessui')) {
-              return 'ui-core';
-            }
-            // Charts - heavy but optional
-            if (id.includes('recharts') || id.includes('apexcharts')) {
-              return 'charts';
-            }
-            // Forms - moderate size
-            if (id.includes('react-hook-form') || id.includes('react-datepicker') || id.includes('date-fns')) {
-              return 'forms';
-            }
-            // Animation - heavy, lazy load
-            if (id.includes('framer-motion') || id.includes('swiper')) {
-              return 'animation';
-            }
-            // Stripe - payment related
-            if (id.includes('@stripe')) {
-              return 'stripe';
-            }
-            // Utilities - small but frequent
-            if (id.includes('clsx') || id.includes('uuid') || id.includes('react-icons')) {
-              return 'utils';
-            }
-            // Everything else
-            return 'vendor';
-          }
-        },
+        // Let Vite handle chunking automatically to avoid empty chunks
+        // manualChunks: undefined,
         // Optimize file naming for better caching
         chunkFileNames: 'assets/js/[name]-[hash:8].js',
         entryFileNames: 'assets/js/[name]-[hash:8].js',
@@ -87,18 +50,11 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
-        passes: 3, // More aggressive compression
-        unsafe: true,
-        unsafe_comps: true,
-        unsafe_math: true,
-        unsafe_proto: true
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2 // Balanced compression
       },
       mangle: {
-        safari10: true,
-        properties: {
-          regex: /^_/
-        }
+        safari10: true
       },
       format: {
         comments: false

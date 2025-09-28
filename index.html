@@ -43,11 +43,7 @@
     <link rel="dns-prefetch" href="https://js.stripe.com" />
     
     <!-- Resource Hints for Critical Resources -->
-    <link rel="preload" href="/assets/js/react-core" as="script" crossorigin />
     <link rel="preload" href="/assets/css/index" as="style" />
-    
-    <!-- Critical Resource Hints -->
-    <link rel="modulepreload" href="/src/main.tsx" />
     
     <!-- Compression and Caching Headers -->
     <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable" />
@@ -98,59 +94,21 @@
     }
     </script>
 
-    <!-- Critical CSS for above-the-fold content -->
+    <!-- Minimal critical CSS to prevent FOUC -->
     <style>
-      /* Critical CSS for immediate rendering */
-      *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell',sans-serif;line-height:1.6;color:#333;background-color:#fff}
+      /* Basic reset and loading states only */
+      *{box-sizing:border-box}
+      body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell',sans-serif;line-height:1.6;color:#333;background-color:#fff}
       
       /* Loading states */
       .animate-spin{animation:spin 1s linear infinite}
       @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
       
-      /* Critical layout classes */
-      .min-h-screen{min-height:100vh}
-      .container{width:100%;margin:0 auto;padding:0 1rem}
-      .mx-auto{margin:0 auto}
-      .hidden{display:none}
-      .block{display:block}
-      .flex{display:flex}
-      .grid{display:grid}
+      /* Prevent FOUC */
+      #root{min-height:100vh}
       
-      /* Critical spacing */
-      .px-4{padding-left:1rem;padding-right:1rem}
-      .py-8{padding-top:2rem;padding-bottom:2rem}
-      .mb-6{margin-bottom:1.5rem}
-      
-      /* Critical typography */
-      .text-4xl{font-size:2.25rem;line-height:2.5rem}
-      .font-bold{font-weight:700}
-      .text-gray-900{color:#111827}
-      .text-white{color:#fff}
-      
-      /* Critical buttons */
-      .bg-blue-600{background-color:#2563eb}
-      .px-6{padding-left:1.5rem;padding-right:1.5rem}
-      .py-3{padding-top:.75rem;padding-bottom:.75rem}
-      .rounded-lg{border-radius:.5rem}
-      
-      /* Critical responsive */
-      @media (min-width:768px){
-        .md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-        .md\:px-6{padding-left:1.5rem;padding-right:1.5rem}
-      }
-      @media (min-width:1024px){
-        .container{max-width:1024px}
-        .lg\:px-8{padding-left:2rem;padding-right:2rem}
-      }
-      
-      /* Performance optimizations */
+      /* Basic image optimization */
       img{max-width:100%;height:auto}
-      .lazy{opacity:0;transition:opacity 0.3s}
-      .lazy.loaded{opacity:1}
-      
-      /* Reduce layout shift */
-      .aspect-square{aspect-ratio:1/1}
-      .aspect-video{aspect-ratio:16/9}
     </style>
     
     <!-- Non-critical styles -->
