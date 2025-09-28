@@ -82,7 +82,16 @@ dist
 
 # Gatsby files
 .cache/
-public
+# public - commented out to allow essential files
+# public
+# Allow essential public files for deployment
+!public/_redirects
+!public/sw.js
+!public/manifest.json
+!public/robots.txt
+!public/sitemap.xml
+!public/images/
+!public/videos/
 
 # Vuepress build output
 .vuepress/dist
