@@ -20,14 +20,50 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     rollupOptions: {
-      treeshake: {
-        moduleSideEffects: false,
-        propertyReadSideEffects: false,
-        unknownGlobalSideEffects: false
-      },
       output: {
-        // Let Vite handle chunking automatically to avoid empty chunks
-        // manualChunks: undefined,
+        manualChunks: {
+          // Core React libraries
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          
+          // UI Libraries
+          'ui-vendor': [
+            '@mantine/core', 
+            '@mantine/hooks', 
+            '@mui/material',
+            '@headlessui/react',
+            '@heroicons/react'
+          ],
+          
+          // Supabase and Auth
+          'supabase-vendor': ['@supabase/supabase-js'],
+          
+          // Charts and Data Visualization
+          'charts-vendor': ['recharts', 'apexcharts'],
+          
+          // Forms and Date Libraries
+          'forms-vendor': [
+            'react-hook-form',
+            'react-datepicker',
+            'date-fns'
+          ],
+          
+          // Animation and UI Utilities
+          'animation-vendor': [
+            'framer-motion',
+            'swiper'
+          ],
+          
+          // Stripe and Payments
+          'stripe-vendor': ['@stripe/react-stripe-js', '@stripe/stripe-js'],
+          
+          // Utilities
+          'utils-vendor': [
+            'papaparse',
+            'uuid',
+            'clsx',
+            'react-icons'
+          ]
+        },
         // Optimize file naming for better caching
         chunkFileNames: 'assets/js/[name]-[hash:8].js',
         entryFileNames: 'assets/js/[name]-[hash:8].js',
@@ -50,14 +86,10 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug'],
-        passes: 2 // Balanced compression
+        pure_funcs: ['console.log', 'console.info', 'console.debug']
       },
       mangle: {
         safari10: true
-      },
-      format: {
-        comments: false
       }
     },
     // Optimize chunk sizes
