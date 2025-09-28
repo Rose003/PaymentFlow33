@@ -3,6 +3,7 @@ import { supabase, checkAuth } from "./lib/supabase";
 import { User } from "@supabase/supabase-js";
 import AuthMFA from "./components/AuthMFA";
 import AppRoutes from "./AppRoutes";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function clearAllStorageAndCookies() {
   // Nettoyage localStorage
@@ -123,12 +124,22 @@ export default function AppWithMFA() {
   }
 
   if (!user) {
-    return <AppRoutes user={null} mfaRequired={false} />;
+    return (
+      <>
+        <GoogleAnalytics />
+        <AppRoutes user={null} mfaRequired={false} />
+      </>
+    );
   }
 
   if (showMFAScreen) {
     return <AuthMFA onMFASuccess={handleMFASuccess} />;
   }
 
-  return <AppRoutes user={user} mfaRequired={false} onMFASuccess={handleMFASuccess} />;
+  return (
+    <>
+      <GoogleAnalytics />
+      <AppRoutes user={user} mfaRequired={false} onMFASuccess={handleMFASuccess} />
+    </>
+  );
 }

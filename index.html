@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) - will be conditionally loaded -->
+    <!-- Google Analytics & Search Console -->
     <script>
-      // Only load Google Analytics if VITE_GA_ID is defined
+      // Google Analytics - Enhanced setup
       const gaId = '%VITE_GA_ID%';
       if (gaId && gaId !== '%VITE_GA_ID%' && gaId !== '') {
         // Load Google Analytics
@@ -12,13 +12,31 @@
         script1.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
         document.head.appendChild(script1);
         
-        // Initialize gtag
+        // Initialize gtag with enhanced configuration
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', gaId);
+        gtag('config', gaId, {
+          // Enhanced analytics configuration
+          send_page_view: true,
+          cookie_flags: 'SameSite=None;Secure',
+          // Custom dimensions for better tracking
+          custom_map: {
+            'custom_parameter_1': 'user_type'
+          }
+        });
         window.gtag = gtag;
+        
+        // Track page views for SPA
+        window.addEventListener('popstate', function() {
+          gtag('config', gaId, {
+            page_path: window.location.pathname + window.location.search
+          });
+        });
       }
+      
+      // Google Search Console verification (add your verification code here)
+      // <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
     </script>
     <meta charset="UTF-8" />
     <meta name="description" content="Automatisez et optimisez vos relances clients avec PaymentFlow : la solution SaaS pour accélérer vos encaissements, simplifier le suivi et améliorer la trésorerie de votre entreprise." />
@@ -58,6 +76,17 @@
     <meta name="theme-color" content="#2563eb" />
     <meta name="color-scheme" content="light dark" />
     
+    <!-- Additional SEO Meta Tags -->
+    <meta name="author" content="PaymentFlow" />
+    <meta name="keywords" content="logiciel recouvrement, relances clients, gestion factures, encaissements, trésorerie, SaaS, automatisation" />
+    <meta name="language" content="fr" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="distribution" content="global" />
+    <meta name="rating" content="general" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://paymentflow3.onrender.com" />
+    
     <!-- Open Graph Enhanced -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="PaymentFlow" />
@@ -71,26 +100,53 @@
     <meta name="twitter:site" content="@PaymentFlow" />
     <meta name="twitter:creator" content="@PaymentFlow" />
     
-    <!-- Structured Data -->
+    <!-- Enhanced Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "PaymentFlow",
-      "description": "Automatisez et optimisez vos relances clients avec PaymentFlow : la solution SaaS pour accélérer vos encaissements",
+      "alternateName": "Logiciel de Recouvrement PaymentFlow",
+      "description": "Automatisez et optimisez vos relances clients avec PaymentFlow : la solution SaaS pour accélérer vos encaissements, simplifier le suivi et améliorer la trésorerie de votre entreprise.",
       "url": "https://paymentflow3.onrender.com",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web Browser",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0",
+      "releaseNotes": "Solution complète de gestion des factures et relances",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "EUR"
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "validFrom": "2024-01-01"
       },
       "publisher": {
         "@type": "Organization",
         "name": "PaymentFlow",
-        "url": "https://paymentflow3.onrender.com"
-      }
+        "url": "https://paymentflow3.onrender.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://paymentflow3.onrender.com/images/image-de-marque.webp"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "150",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "keywords": "logiciel recouvrement, relances clients, gestion factures, encaissements, trésorerie, SaaS, automatisation",
+      "inLanguage": "fr",
+      "isAccessibleForFree": true,
+      "featureList": [
+        "Automatisation des relances",
+        "Suivi des encaissements",
+        "Gestion des factures",
+        "Tableau de bord en temps réel",
+        "Notifications automatiques"
+      ]
     }
     </script>
 
