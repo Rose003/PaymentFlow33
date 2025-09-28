@@ -33,23 +33,124 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
     
-    <!-- Performance optimizations -->
+    <!-- Advanced Performance Optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://chatling.ai" />
     <link rel="dns-prefetch" href="https://calendly.com" />
+    <link rel="dns-prefetch" href="https://api.supabase.co" />
+    <link rel="dns-prefetch" href="https://js.stripe.com" />
+    
+    <!-- Resource Hints for Critical Resources -->
+    <link rel="preload" href="/assets/js/react-core" as="script" crossorigin />
+    <link rel="preload" href="/assets/css/index" as="style" />
+    
+    <!-- Critical Resource Hints -->
+    <link rel="modulepreload" href="/src/main.tsx" />
+    
+    <!-- Compression and Caching Headers -->
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    
+    <!-- SEO and Performance Meta Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="color-scheme" content="light dark" />
+    
+    <!-- Open Graph Enhanced -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PaymentFlow" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PaymentFlow - Logiciel de recouvrement et relances clients" />
+    
+    <!-- Twitter Card Enhanced -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@PaymentFlow" />
+    <meta name="twitter:creator" content="@PaymentFlow" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PaymentFlow",
+      "description": "Automatisez et optimisez vos relances clients avec PaymentFlow : la solution SaaS pour accélérer vos encaissements",
+      "url": "https://paymentflow3.onrender.com",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "PaymentFlow",
+        "url": "https://paymentflow3.onrender.com"
+      }
+    }
+    </script>
 
-    <!-- Basic loading styles only -->
+    <!-- Critical CSS for above-the-fold content -->
     <style>
-      /* Minimal loading styles to prevent FOUC */
-      .animate-spin {
-        animation: spin 1s linear infinite;
+      /* Critical CSS for immediate rendering */
+      *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell',sans-serif;line-height:1.6;color:#333;background-color:#fff}
+      
+      /* Loading states */
+      .animate-spin{animation:spin 1s linear infinite}
+      @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+      
+      /* Critical layout classes */
+      .min-h-screen{min-height:100vh}
+      .container{width:100%;margin:0 auto;padding:0 1rem}
+      .mx-auto{margin:0 auto}
+      .hidden{display:none}
+      .block{display:block}
+      .flex{display:flex}
+      .grid{display:grid}
+      
+      /* Critical spacing */
+      .px-4{padding-left:1rem;padding-right:1rem}
+      .py-8{padding-top:2rem;padding-bottom:2rem}
+      .mb-6{margin-bottom:1.5rem}
+      
+      /* Critical typography */
+      .text-4xl{font-size:2.25rem;line-height:2.5rem}
+      .font-bold{font-weight:700}
+      .text-gray-900{color:#111827}
+      .text-white{color:#fff}
+      
+      /* Critical buttons */
+      .bg-blue-600{background-color:#2563eb}
+      .px-6{padding-left:1.5rem;padding-right:1.5rem}
+      .py-3{padding-top:.75rem;padding-bottom:.75rem}
+      .rounded-lg{border-radius:.5rem}
+      
+      /* Critical responsive */
+      @media (min-width:768px){
+        .md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+        .md\:px-6{padding-left:1.5rem;padding-right:1.5rem}
       }
-      @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+      @media (min-width:1024px){
+        .container{max-width:1024px}
+        .lg\:px-8{padding-left:2rem;padding-right:2rem}
       }
+      
+      /* Performance optimizations */
+      img{max-width:100%;height:auto}
+      .lazy{opacity:0;transition:opacity 0.3s}
+      .lazy.loaded{opacity:1}
+      
+      /* Reduce layout shift */
+      .aspect-square{aspect-ratio:1/1}
+      .aspect-video{aspect-ratio:16/9}
     </style>
     
     <!-- Non-critical styles -->
@@ -71,21 +172,39 @@
 
       window.chtlConfig = { chatbotId: "4596411993" };
       
-      // Register Service Worker for caching and performance
-      // Temporarily disabled to avoid conflicts
-      /*
+      // Register Service Worker for advanced caching and performance
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
             .then((registration) => {
-              console.log('SW registered: ', registration);
+              console.log('SW registered successfully:', registration);
+              
+              // Handle updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    // New version available, reload page
+                    window.location.reload();
+                  }
+                });
+              });
             })
             .catch((registrationError) => {
-              console.log('SW registration failed: ', registrationError);
+              console.log('SW registration failed:', registrationError);
             });
         });
       }
-      */
+      
+      // Performance monitoring
+      if ('performance' in window) {
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            console.log('Page load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
+          }, 0);
+        });
+      }
     </script>
    <!-- <script
       async
@@ -104,3 +223,4 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+

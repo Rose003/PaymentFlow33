@@ -20,102 +20,98 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     rollupOptions: {
+      treeshake: {
+        moduleSideEffects: false,
+        propertyReadSideEffects: false,
+        unknownGlobalSideEffects: false
+      },
       output: {
-        manualChunks: {
-          // Core React libraries
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          
-          // UI Libraries
-          'ui-vendor': [
-            '@mantine/core', 
-            '@mantine/hooks', 
-            '@mui/material',
-            '@headlessui/react',
-            '@heroicons/react',
-            '@radix-ui/react-popover',
-            '@radix-ui/react-select'
-          ],
-          
-          // Charts and Data Visualization
-          'charts-vendor': [
-            'recharts',
-            'react-apexcharts',
-            'apexcharts'
-          ],
-          
-          // Forms and Date Libraries
-          'forms-vendor': [
-            'react-hook-form',
-            'react-datepicker',
-            'react-datetime',
-            'react-datetime-picker',
-            'react-calendar',
-            'react-clock',
-            'date-fns',
-            'dayjs'
-          ],
-          
-          // Supabase and Auth
-          'supabase-vendor': [
-            '@supabase/supabase-js',
-            '@supabase/auth-ui-react',
-            '@supabase/postgrest-js',
-            '@supabase/realtime-js',
-            '@supabase/storage-js'
-          ],
-          
-          // Stripe and Payments
-          'stripe-vendor': [
-            '@stripe/react-stripe-js',
-            '@stripe/stripe-js',
-            'stripe'
-          ],
-          
-          // Animation and UI Utilities
-          'animation-vendor': [
-            'framer-motion',
-            'swiper',
-            'react-easy-crop',
-            'react-color'
-          ],
-          
-          // Utilities
-          'utils-vendor': [
-            'papaparse',
-            'uuid',
-            'clsx',
-            'tailwind-variants',
-            'react-icons',
-            'lucide-react'
-          ]
+        manualChunks: (id) => {
+          // More granular chunking for better caching
+          if (id.includes('node_modules')) {
+            // Core React - highest priority, smallest chunk
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'react-core';
+            }
+            // Supabase - critical for auth
+            if (id.includes('@supabase')) {
+              return 'supabase';
+            }
+            // UI libraries - grouped by usage
+            if (id.includes('@mantine') || id.includes('@mui') || id.includes('@headlessui')) {
+              return 'ui-core';
+            }
+            // Charts - heavy but optional
+            if (id.includes('recharts') || id.includes('apexcharts')) {
+              return 'charts';
+            }
+            // Forms - moderate size
+            if (id.includes('react-hook-form') || id.includes('react-datepicker') || id.includes('date-fns')) {
+              return 'forms';
+            }
+            // Animation - heavy, lazy load
+            if (id.includes('framer-motion') || id.includes('swiper')) {
+              return 'animation';
+            }
+            // Stripe - payment related
+            if (id.includes('@stripe')) {
+              return 'stripe';
+            }
+            // Utilities - small but frequent
+            if (id.includes('clsx') || id.includes('uuid') || id.includes('react-icons')) {
+              return 'utils';
+            }
+            // Everything else
+            return 'vendor';
+          }
         },
-        // Optimize chunk file names
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
+        // Optimize file naming for better caching
+        chunkFileNames: 'assets/js/[name]-[hash:8].js',
+        entryFileNames: 'assets/js/[name]-[hash:8].js',
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/\.(png|jpe?g|gif|svg|webp|avif)$/i.test(assetInfo.name)) {
+            return `assets/images/[name]-[hash:8].[ext]`;
+          }
+          if (/\.(woff2?|eot|ttf|otf)$/i.test(assetInfo.name)) {
+            return `assets/fonts/[name]-[hash:8].[ext]`;
+          }
+          return `assets/[name]-[hash:8].[ext]`;
+        }
       }
     },
     sourcemap: false,
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, // Remove console logs in production
+        drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug'],
-        passes: 2 // Multiple passes for better compression
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
+        passes: 3, // More aggressive compression
+        unsafe: true,
+        unsafe_comps: true,
+        unsafe_math: true,
+        unsafe_proto: true
       },
       mangle: {
-        safari10: true
+        safari10: true,
+        properties: {
+          regex: /^_/
+        }
+      },
+      format: {
+        comments: false
       }
     },
-    // Increase chunk size warning limit
-    chunkSizeWarningLimit: 1000,
+    // Optimize chunk sizes
+    chunkSizeWarningLimit: 800,
     commonjsOptions: {
       include: [/node_modules/, /@supabase/],
       transformMixedEsModules: true,
       requireReturnsDefault: 'auto'
     },
-    // CSS optimization
+    // Advanced CSS optimization
     cssCodeSplit: true,
     cssMinify: true
   },
