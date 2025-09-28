@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <url>
+    <loc>https://paymentflow3.onrender.com/</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - Accueil</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/help</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - help</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/temoignages</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - temoignages</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/subscribe</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - subscribe</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/reporting-recouvrement</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - reporting recouvrement</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/crm</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - crm</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/simulateur-dso</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - simulateur dso</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/personnalisation</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - personnalisation</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/signup</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - signup</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/login</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - login</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/forgot-password</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - forgot password</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/pricing</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - pricing</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/privacy</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - privacy</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/mentions-legales</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - mentions legales</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/conditions-utilisation</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - conditions utilisation</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/blog</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - blog</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/blog-garage</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - blog garage</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/blog-manufacture</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - blog manufacture</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/blog-communication</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - blog communication</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/blog-comptable-banque</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - blog comptable-banque</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/blog-optimisation-relance</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - blog optimisation-relance</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://paymentflow3.onrender.com/reset-password</loc>
+    <lastmod>2025-09-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://paymentflow3.onrender.com/images/paymentflow-og-image.jpg</image:loc>
+      <image:title>PaymentFlow - reset password</image:title>
+      <image:caption>Solution de gestion des factures et relances</image:caption>
+    </image:image>
+  </url>
+</urlset>
