@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 // Import critical components normally to avoid routing issues
 import LandingPage from "./pages/LandingPage";
@@ -62,6 +63,7 @@ interface AppRoutesProps {
 export default function AppRoutes({ user, onMFASuccess }: AppRoutesProps) {
   return (
     <Router>
+      <GoogleAnalytics />
       {!user && <AppHeader user={user} onContactClick={() => {}} />}
 
       <Routes>
