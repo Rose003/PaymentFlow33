@@ -3,15 +3,10 @@ const CACHE_NAME = 'paymentflow-v1';
 const STATIC_CACHE = 'paymentflow-static-v1';
 const DYNAMIC_CACHE = 'paymentflow-dynamic-v1';
 
-// Files to cache immediately
+// Files to cache immediately (only files that definitely exist)
 const STATIC_FILES = [
   '/',
-  '/index.html',
-  '/assets/index.css',
-  '/manifest.json',
-  '/images/1.png',
-  '/images/2.png',
-  '/images/image-de-marque.webp'
+  '/manifest.json'
 ];
 
 // Install event - cache static files
@@ -21,6 +16,11 @@ self.addEventListener('install', (event) => {
       .then((cache) => {
         console.log('Caching static files');
         return cache.addAll(STATIC_FILES);
+      })
+      .catch((error) => {
+        console.log('Failed to cache some files:', error);
+        // Continue even if some files fail to cache
+        return Promise.resolve();
       })
       .then(() => self.skipWaiting())
   );
