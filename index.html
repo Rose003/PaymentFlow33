@@ -63,10 +63,8 @@
     <!-- Resource Hints for Critical Resources -->
     <link rel="preload" href="/assets/css/index" as="style" />
     
-    <!-- Compression and Caching Headers -->
-    <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable" />
+    <!-- Security Headers (Note: X-Frame-Options and Cache-Control should be set via HTTP headers) -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     
     <!-- SEO and Performance Meta Tags -->
