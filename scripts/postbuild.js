@@ -81,6 +81,12 @@ function postbuild() {
     path.join(distPath, 'manifest.json')
   );
   
+  // Copy _redirects file for proper static asset serving
+  copyFileIfExists(
+    path.join(__dirname, '../public/_redirects'),
+    path.join(distPath, '_redirects')
+  );
+  
   console.log('🎉 Post-build tasks completed!');
 }
 
